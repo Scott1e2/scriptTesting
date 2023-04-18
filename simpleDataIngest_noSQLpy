@@ -1,0 +1,21 @@
+import csv
+from pymongo import MongoClient
+
+# Connect to MongoDB
+client = MongoClient("mongodb://username:password@host:port/")
+db = client["database_name"]
+collection = db["collection_name"]
+
+# Read the CSV file
+with open("data.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        # Insert each row of data into MongoDB
+        collection.insert_one(row)
+
+print("Data ingestion complete!")
+
+
+#This script uses the PyMongo library to connect to a MongoDB database and insert the data from a CSV file into a specific collection. You will need to replace "username", "password", "host", "port" with the appropriate credentials to connect to your MongoDB instance, "database_name" with the name of your MongoDB database, and "collection_name" with the name of the collection you want to insert the data into.
+
+#You also need to install PyMongo library by running !pip install pymongo
